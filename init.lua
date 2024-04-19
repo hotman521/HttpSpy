@@ -6,7 +6,7 @@ if rconsoleprint then
     rconsoleprint("Join Discord frfr https://discord.gg/JwNQ6HZGFw")
 end;
 
-assert(syn or http, "Unsupport exploit (should support syn.request or http.request)");
+local http_request = http and http.request or http_request or request or httprequest
 
 local options = ({...})[1] or { AutoDecode = true, Highlighting = true, SaveLogs = true, CLICommands = true, ShowResponse = true, BlockedURLs = {}, API = true };
 local version = "v1.1.3";
@@ -34,7 +34,7 @@ local Error = clonef(error);
 local getnamecallmethod = clonef(getnamecallmethod);
 local blocked = options.BlockedURLs;
 local enabled = true;
-local reqfunc = (syn or http).request;
+local reqfunc = http_request;
 local libtype = syn and "syn" or "http";
 local hooked = {};
 local proxied = {};
